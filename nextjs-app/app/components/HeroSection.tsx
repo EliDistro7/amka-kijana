@@ -59,7 +59,7 @@ const heroContent = {
       link: "/contact"
     },
     {
-      image: "/images/hero-2.jpeg",
+      image: "/images/hero-4.jpeg",
       tagline: {
         en: "Financial Growth",
         sw: "Ukuaji wa Kifedha"
@@ -80,7 +80,7 @@ const heroContent = {
       link: "/contact"
     },
     {
-      image: "/images/hero-3.jpeg",
+      image: "/images/hero-5.jpeg",
       tagline: {
         en: "Community Engagement",
         sw: "Ushirikishwaji wa Jamii"
