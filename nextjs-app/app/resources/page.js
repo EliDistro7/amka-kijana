@@ -5,16 +5,40 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/app/components/ui/ta
 import { Presentation, Video } from 'lucide-react';
 import PresentationsTab from '@/app/components/resources/PresentationsTab';
 import ZoomMeetingsTab from '@/app/components/resources/ZoomMeetingsTab';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function ResourcesPage() {
   const [activeTab, setActiveTab] = useState('presentations');
+  const { language } = useLanguage();
+
+  // Bilingual content
+  const pageContent = {
+    title: {
+      en: "Resources",
+      sw: "Rasilimali"
+    },
+    description: {
+      en: "Access our collection of presentations and recorded zoom meetings to help you get the most out of our services and learn more about reproductive health, mental wellness, and gender-based violence prevention.",
+      sw: "Fikia mkusanyiko wetu wa maonyesho na mikutano ya zoom iliyorekodiwa ili kukusaidia kupata manufaa zaidi kutoka kwenye huduma zetu na kujifunza zaidi kuhusu afya ya uzazi, ustawi wa akili, na kuzuia ukatili wa kijinsia."
+    },
+    presentations: {
+      en: "Presentations",
+      sw: "Maonyesho"
+    },
+    zoomMeetings: {
+      en: "Zoom Meetings",
+      sw: "Mikutano ya Zoom"
+    }
+  };
 
   return (
     <div className="container py-12 max-w-6xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-heading-1 font-heading text-primary-700 mb-4">Resources</h1>
+        <h1 className="text-heading-1 font-heading text-primary-700 mb-4">
+          {pageContent.title[language]}
+        </h1>
         <p className="text-lg text-neutral-700 max-w-3xl">
-          Access our collection of presentations and recorded zoom meetings to help you get the most out of our services.
+          {pageContent.description[language]}
         </p>
       </div>
 
@@ -35,7 +59,7 @@ export default function ResourcesPage() {
               }`}
             >
               <Presentation size={18} />
-              <span>Presentations</span>
+              <span>{pageContent.presentations[language]}</span>
             </TabsTrigger>
             <TabsTrigger 
               value="zoom-meetings" 
@@ -46,7 +70,7 @@ export default function ResourcesPage() {
               }`}
             >
               <Video size={18} />
-              <span>Zoom Meetings</span>
+              <span>{pageContent.zoomMeetings[language]}</span>
             </TabsTrigger>
           </TabsList>
 
