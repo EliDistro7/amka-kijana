@@ -9,33 +9,23 @@ export default function PresentationsTab() {
   const presentations = [
     {
       id: 1,
-      title: "2024 Strategy Overview",
+      title: "16 days of activism",
       description: "Annual strategic roadmap and growth initiatives for stakeholders.",
-      thumbnail: "/images/presentations/strategy-overview.jpg",
+      thumbnail: "/violence.jpeg",
       dateCreated: "2025-04-15",
-      
       fileSize: "4.2 MB",
-      downloadUrl: "/resources/presentations/strategy-overview.pptx",
+      downloadUrl: "/ukatili.pptx",
       previewUrl: "/resources/previews/strategy-overview",
     },
-    {
-      id: 2,
-      title: "Product Launch Framework",
-      description: "Step-by-step guide for successful product launches with case studies.",
-      thumbnail: "/images/presentations/product-launch.jpg",
-      dateCreated: "2025-03-22",
-      fileSize: "3.8 MB",
-      downloadUrl: "/resources/presentations/product-launch.pptx",
-      previewUrl: "/resources/previews/product-launch",
-    },
+ 
     {
       id: 3,
-      title: "Customer Success Stories",
+      title: "Role of a Man in Reproductive Health",
       description: "Collection of case studies and testimonials from satisfied clients.",
-      thumbnail: "/images/presentations/success-stories.jpg",
+      thumbnail: "/zoom_man.jpeg",
       dateCreated: "2025-02-08",
       fileSize: "5.6 MB",
-      downloadUrl: "/resources/presentations/success-stories.pptx",
+      downloadUrl: "/man.pptx",
       previewUrl: "/resources/previews/success-stories",
     },
   ];
@@ -59,10 +49,19 @@ export default function PresentationsTab() {
         {presentations.map((presentation) => (
           <div key={presentation.id} className="bg-white rounded-lg border border-neutral-200 overflow-hidden transition-all hover:shadow-soft group">
             <div className="relative aspect-video bg-neutral-100">
-              {/* This would be your presentation thumbnail */}
-              <div className="w-full h-full flex items-center justify-center bg-primary-50">
-                <FilePresentation size={48} className="text-primary-300" />
-              </div>
+              {/* Display the actual thumbnail image */}
+              {presentation.thumbnail ? (
+                <Image 
+                  src={presentation.thumbnail}
+                  alt={presentation.title}
+                  fill
+                  className="object-cover"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-primary-50">
+                  <FilePresentation size={48} className="text-primary-300" />
+                </div>
+              )}
 
               {/* Hover actions overlay */}
               <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
@@ -89,12 +88,7 @@ export default function PresentationsTab() {
             </div>
 
             <div className="p-4 pt-0 flex justify-between">
-              <Link 
-                href={presentation.previewUrl} 
-                className="text-sm font-medium text-secondary-600 hover:text-secondary-700"
-              >
-                Preview
-              </Link>
+             
               <Link 
                 href={presentation.downloadUrl} 
                 className="text-sm font-medium text-primary-600 hover:text-primary-700 flex items-center gap-1"
