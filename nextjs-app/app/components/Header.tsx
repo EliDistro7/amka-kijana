@@ -19,6 +19,10 @@ const navItems = {
     en: 'Blog',
     sw: 'Blog',
   },
+  resources: {
+    en: 'Resources',
+    sw: 'Rasilimali',
+  },
   privacy: {
     en: 'Privacy',
     sw: 'Faragha',

@@ -43,8 +43,8 @@ const contactContent = {
           sw: "Mahali Tulipo"
         },
         content: {
-          en: "Kijitonyama, Dar es Salaam, Tanzania",
-          sw: "Kijitonyama, Dar es Salaam, Tanzania"
+          en: "Mbezi Luis, Dar es Salaam, Tanzania",
+          sw: "Mbezi Luis, Dar es Salaam, Tanzania"
         }
       },
       {
@@ -62,7 +62,7 @@ const contactContent = {
         icon: <Phone className="h-6 w-6 text-primary-600" />,
         title: {
           en: "Call Us",
-          sw: "Tupe Simu"
+          sw: "Tupigie"
         },
         content: {
           en: "+255 748 908 001",
