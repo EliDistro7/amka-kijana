@@ -39,7 +39,7 @@ const heroContent = {
   },
   slides: [
     {
-      image: "/images/violence.jpeg",
+      image: "/violence.jpeg",
       tagline: {
         en: "Mental Wellness",
         sw: "Afya ya Akili"
