@@ -1,77 +1,84 @@
 import React, { useState, useEffect } from 'react';
 import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
+import "@cyntler/react-doc-viewer/dist/index.css"; // Required styles import
 
-export default function PresentationViewerDemo() {
-  // Use your local file from the public folder
-  const [demoUrl, setDemoUrl] = useState('/ukatili.pptx'); // Fixed the URL to be a proper path
-  const [isViewing, setIsViewing] = useState(true); // Auto-show the local file
+export default function ImprovedPPTXViewer() {
+  const [fileUrl, setFileUrl] = useState('/ukatili.pptx');
+  const [documents, setDocuments] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // Create documents array for DocViewer
-  const [documents, setDocuments] = useState([
-    { uri: demoUrl, fileType: "pptx" }
-  ]);
-
-  // Automatically load the local presentation on component mount
+  // Load the document when component mounts or fileUrl changes
   useEffect(() => {
-    handleViewDemo();
-  }, []);
+    loadDocument();
+  }, [fileUrl]);
 
-  const handleViewDemo = async () => {
+  const loadDocument = () => {
+    setIsLoading(true);
     setError('');
-    setIsViewing(false);
     
     try {
-      // Update documents array with new URL
-      setDocuments([{ uri: demoUrl, fileType: "pptx" }]);
-      setIsViewing(true);
+      // Create the document object with the current URL
+      const newDocuments = [{ 
+        uri: fileUrl, 
+        fileName: fileUrl.split('/').pop() // Extract filename from URL
+      }];
+      
+      setDocuments(newDocuments);
+      setIsLoading(false);
     } catch (err) {
-      console.error('Error accessing presentation file:', err);
-      setError(`${err.message}`);
+      console.error('Error preparing document:', err);
+      setError(`Failed to load document: ${err.message}`);
+      setIsLoading(false);
     }
+  };
+
+  const handleUrlChange = (e) => {
+    setFileUrl(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    loadDocument();
   };
 
   return (
     <div className="p-6 max-w-5xl mx-auto">
       <header className="mb-8 text-center">
-        <h1 className="text-3xl font-bold text-gray-800 mb-2">PPTX Viewer - Ukatili Presentation</h1>
-        <p className="text-gray-600">Viewing your local PowerPoint file from the public folder</p>
+        <h1 className="text-3xl font-bold text-gray-800 mb-2">PPTX Viewer</h1>
+        <p className="text-gray-600">View PowerPoint presentations in your browser</p>
       </header>
       
       <div className="mb-8 bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-xl font-semibold mb-4">Local Presentation</h2>
+        <h2 className="text-xl font-semibold mb-4">Document Settings</h2>
         
-        <div className="mb-4">
-          <p className="text-gray-700">
-            Currently viewing: <strong>ukatili.pptx</strong> from your public folder
-          </p>
-          <p className="mt-1 text-sm text-gray-500">
-            You can also try a different PPTX file by entering its path below
-          </p>
-        </div>
-        
-        <div className="mb-4">
-          <label htmlFor="demo-url" className="block text-sm font-medium text-gray-700 mb-1">
-            PPTX Path or URL
-          </label>
-          <input
-            id="demo-url"
-            type="text"
-            value={demoUrl}
-            onChange={(e) => setDemoUrl(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
-            placeholder="/path/to/presentation.pptx"
-          />
-        </div>
-        
-        <div className="flex justify-center">
-          <button
-            onClick={handleViewDemo}
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
-          >
-            Load Presentation
-          </button>
-        </div>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label htmlFor="file-url" className="block text-sm font-medium text-gray-700 mb-1">
+              PPTX Path or URL
+            </label>
+            <input
+              id="file-url"
+              type="text"
+              value={fileUrl}
+              onChange={handleUrlChange}
+              className="w-full p-2 border border-gray-300 rounded"
+              placeholder="/path/to/presentation.pptx"
+            />
+            <p className="mt-1 text-sm text-gray-500">
+              Enter the path to a local file in your public folder or a full URL
+            </p>
+          </div>
+          
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+            >
+              Load Presentation
+            </button>
+          </div>
+        </form>
         
         {error && (
           <div className="mt-4 p-3 bg-red-50 border-l-4 border-red-500 text-red-700">
@@ -80,10 +87,15 @@ export default function PresentationViewerDemo() {
         )}
       </div>
       
-      {isViewing && (
-        <div className="mb-8">
-          <h2 className="text-xl font-semibold mb-4">Presentation Preview</h2>
-          <div className="border border-gray-300 rounded">
+      {documents.length > 0 && (
+        <div className="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+          <div className="p-4 bg-gray-50 border-b">
+            <h2 className="text-xl font-semibold">
+              Viewing: {documents[0].fileName || documents[0].uri.split('/').pop()}
+            </h2>
+          </div>
+          
+          <div style={{ height: '600px' }}>
             <DocViewer
               documents={documents}
               pluginRenderers={DocViewerRenderers}
@@ -94,34 +106,20 @@ export default function PresentationViewerDemo() {
                   retainURLParams: false
                 }
               }}
-              style={{ height: 500 }}
+              style={{ height: '100%' }}
             />
           </div>
         </div>
       )}
       
-      <div className="bg-gray-50 rounded-lg p-6 mb-8">
-        <h2 className="text-xl font-semibold mb-4">How It Works</h2>
-        <p className="mb-3">
-          This viewer uses react-doc-viewer to display various document types including PowerPoint presentations.
-          The library provides these benefits:
-        </p>
-        <ul className="list-disc pl-5 space-y-2 mb-4">
-          <li>Support for multiple file formats (PPT, PPTX, DOC, DOCX, PDF, and more)</li>
-          <li>Built-in controls for navigation and zooming</li>
-          <li>Responsive design that works well on different screen sizes</li>
-          <li>Customizable UI through configuration options</li>
+      <div className="bg-gray-50 rounded-lg p-6">
+        <h2 className="text-xl font-semibold mb-4">Document Viewer Information</h2>
+        <ul className="list-disc pl-5 space-y-2">
+          <li>This viewer supports PPTX, PDF, DOCX and other document formats</li>
+          <li>For local files, make sure they are in your public folder</li>
+          <li>For remote files, ensure they are accessible via URLs that support CORS</li>
+          <li>Use the controls in the viewer header to navigate between slides</li>
         </ul>
-        <p>
-          For full fidelity with complex presentations, consider using dedicated services like Microsoft
-          Office Online or Google Slides.
-        </p>
-      </div>
-      
-      <div className="text-center text-gray-500 text-sm">
-        <p>
-          Note: This viewer requires PPTX files to be accessible via URLs that support CORS (Cross-Origin Resource Sharing).
-        </p>
       </div>
     </div>
   );
