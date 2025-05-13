@@ -19,11 +19,11 @@ export default function ResourcesPage() {
     },
     description: {
       en: "Access our collection of presentations and recorded zoom meetings to help you get the most out of our services and learn more about reproductive health, mental wellness, and gender-based violence prevention.",
-      sw: "Fikia mkusanyiko wetu wa maonyesho na mikutano ya zoom iliyorekodiwa ili kukusaidia kupata manufaa zaidi kutoka kwenye huduma zetu na kujifunza zaidi kuhusu afya ya uzazi, ustawi wa akili, na kuzuia ukatili wa kijinsia."
+      sw: "Fikia mkusanyiko wetu wa presentations na mikutano ya zoom iliyorekodiwa ili kukusaidia kupata manufaa zaidi kutoka kwenye huduma zetu na kujifunza zaidi kuhusu afya ya uzazi, ustawi wa akili, na kuzuia ukatili wa kijinsia."
     },
     presentations: {
       en: "Presentations",
-      sw: "Maonyesho"
+      sw: "Presentations"
     },
     zoomMeetings: {
       en: "Zoom Meetings",
@@ -63,7 +63,7 @@ export default function ResourcesPage() {
             </TabsTrigger>
             <TabsTrigger 
               value="zoom-meetings" 
-              className={`flex items-center gap-2 px-6 py-3 rounded-md transition-all ${
+              className={`flex items-center gap-2 px-3 py-3 rounded-md transition-all ${
                 activeTab === 'zoom-meetings' 
                   ? 'bg-white shadow-soft text-primary-700' 
                   : 'text-neutral-600 hover:text-primary-600'
