@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import PPTXViewer from './PPTXViewer';
+import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
 
 export default function PresentationViewerDemo() {
   // Use your local file from the public folder
   const [demoUrl, setDemoUrl] = useState('/ukatili.pptx'); // Fixed the URL to be a proper path
   const [isViewing, setIsViewing] = useState(true); // Auto-show the local file
   const [error, setError] = useState('');
+
+  // Create documents array for DocViewer
+  const [documents, setDocuments] = useState([
+    { uri: demoUrl, fileType: "pptx" }
+  ]);
 
   // Automatically load the local presentation on component mount
   useEffect(() => {
@@ -17,8 +22,8 @@ export default function PresentationViewerDemo() {
     setIsViewing(false);
     
     try {
-      // For local files in the public folder, we don't need the HEAD check
-      // as they should be accessible by default
+      // Update documents array with new URL
+      setDocuments([{ uri: demoUrl, fileType: "pptx" }]);
       setIsViewing(true);
     } catch (err) {
       console.error('Error accessing presentation file:', err);
@@ -78,21 +83,34 @@ export default function PresentationViewerDemo() {
       {isViewing && (
         <div className="mb-8">
           <h2 className="text-xl font-semibold mb-4">Presentation Preview</h2>
-          <PPTXViewer url={demoUrl} title="Ukatili Presentation" showControls={true} allowDownload={true} />
+          <div className="border border-gray-300 rounded">
+            <DocViewer
+              documents={documents}
+              pluginRenderers={DocViewerRenderers}
+              config={{
+                header: {
+                  disableHeader: false,
+                  disableFileName: false,
+                  retainURLParams: false
+                }
+              }}
+              style={{ height: 500 }}
+            />
+          </div>
         </div>
       )}
       
       <div className="bg-gray-50 rounded-lg p-6 mb-8">
         <h2 className="text-xl font-semibold mb-4">How It Works</h2>
         <p className="mb-3">
-          This viewer uses SheetJS to extract data from PPTX files and convert it to a displayable format.
-          It&apos;s important to note that this approach has limitations:
+          This viewer uses react-doc-viewer to display various document types including PowerPoint presentations.
+          The library provides these benefits:
         </p>
         <ul className="list-disc pl-5 space-y-2 mb-4">
-          <li>Text content is extracted, but formatting may be simplified</li>
-          <li>Animations and transitions aren&apos;t supported</li>
-          <li>Complex layouts might not render perfectly</li>
-          <li>Images might not be displayed</li>
+          <li>Support for multiple file formats (PPT, PPTX, DOC, DOCX, PDF, and more)</li>
+          <li>Built-in controls for navigation and zooming</li>
+          <li>Responsive design that works well on different screen sizes</li>
+          <li>Customizable UI through configuration options</li>
         </ul>
         <p>
           For full fidelity with complex presentations, consider using dedicated services like Microsoft
