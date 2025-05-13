@@ -88,8 +88,7 @@ export default async function RootLayout({
        
         <SpeedInsights />
         </LanguageProvider>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="path/to/pptxjs/library.js"></script>
+   
 
       </body>
     </html>
