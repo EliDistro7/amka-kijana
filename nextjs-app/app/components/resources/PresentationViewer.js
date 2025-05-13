@@ -3,7 +3,7 @@ import PPTXViewer from './PPTXViewer';
 
 export default function PresentationViewerDemo() {
   // Use your local file from the public folder
-  const [demoUrl, setDemoUrl] = useState('https/amkakijana.org/ukatili.pptx');
+  const [demoUrl, setDemoUrl] = useState('/ukatili.pptx'); // Fixed the URL to be a proper path
   const [isViewing, setIsViewing] = useState(true); // Auto-show the local file
   const [error, setError] = useState('');
 
@@ -86,11 +86,11 @@ export default function PresentationViewerDemo() {
         <h2 className="text-xl font-semibold mb-4">How It Works</h2>
         <p className="mb-3">
           This viewer uses SheetJS to extract data from PPTX files and convert it to a displayable format.
-          It's important to note that this approach has limitations:
+          It&apos;s important to note that this approach has limitations:
         </p>
         <ul className="list-disc pl-5 space-y-2 mb-4">
           <li>Text content is extracted, but formatting may be simplified</li>
-          <li>Animations and transitions aren't supported</li>
+          <li>Animations and transitions aren&apos;t supported</li>
           <li>Complex layouts might not render perfectly</li>
           <li>Images might not be displayed</li>
         </ul>
