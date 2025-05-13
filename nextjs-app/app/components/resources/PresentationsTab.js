@@ -33,6 +33,14 @@ export default function PresentationsTab() {
     checkBack: {
       en: "Check back later for updated resources.",
       sw: "Angalia baadaye kwa rasilimali zilizosasishwa."
+    },
+    presenter: {
+      en: "Presented by:",
+      sw: "Imewasilishwa na:"
+    },
+    organizer: {
+      en: "Organized by:",
+      sw: "Imeandaliwa na:"
     }
   };
 
@@ -53,6 +61,62 @@ export default function PresentationsTab() {
       fileSize: "4.2 MB",
       downloadUrl: "/ukatili.pptx",
       previewUrl: "/resources/previews/strategy-overview",
+    },
+    {
+      id: 2,
+      title: {
+        en: "The Role of Men in Mental Health, Sexual, and Reproductive Health",
+        sw: "Jukumu la Wanaume katika Afya ya Akili, Afya ya Ngono, na Afya ya Uzazi"
+      },
+      description: {
+        en: "Mental health and reproductive health are interconnected. Men's mental health affects relationships, decision-making, and overall well-being.",
+        sw: "Afya ya akili na afya ya uzazi zinahusiana. Afya ya akili ya wanaume huathiri mahusiano, ufanyaji maamuzi, na ustawi wa jumla."
+      },
+      presenter: {
+        name: {
+          en: "Malick B. Shekimweri",
+          sw: "Malick B. Shekimweri"
+        },
+        title: {
+          en: "Psychologist, Siha Angavu Mental Health Care & Rehabilitation",
+          sw: "Mwanasaikolojia, Siha Angavu Mental Health Care & Rehabilitation"
+        }
+      },
+      organizer: {
+        en: "Akili Huru & Amka Kijana Initiative",
+        sw: "Akili Huru & Mpango wa Amka Kijana"
+      },
+      eventDate: {
+        en: "5TH–7TH March, 2025",
+        sw: "Tarehe 5-7 Machi, 2025"
+      },
+      details: {
+        en: [
+          "Men are less likely to seek mental health support due to:",
+          "Social stigma ('Real men don't cry')",
+          "Fear of appearing weak or vulnerable",
+          "Limited awareness of mental health issues",
+          "Suppressing emotions can lead to:",
+          "Stress and burnout",
+          "Aggression and violence",
+          "Substance abuse as a coping mechanism"
+        ],
+        sw: [
+          "Wanaume mara nyingi hawatafuti msaada wa afya ya akili kwa sababu ya:",
+          "Unyanyapaa wa kijamii ('Wanaume halisi hawalii')",
+          "Hofu ya kuonekana dhaifu au dhaifu",
+          "Uelewa mdogo wa masuala ya afya ya akili",
+          "Kukandamiza hisia kunaweza kusababisha:",
+          "Msongo wa mawazo na kuchoka",
+          "Uchokozi na ukatili",
+          "Matumizi mabaya ya dawa kama njia ya kukabiliana"
+        ]
+      },
+      thumbnail: "/mental_health.jpg",
+      dateCreated: "2025-03-10",
+      fileSize: "3.8 MB",
+      downloadUrl: "/mental_health.pptx",
+      previewUrl: "/resources/previews/mental-health",
     },
     {
       id: 3,
@@ -109,7 +173,9 @@ export default function PresentationsTab() {
 
               {/* Hover actions overlay */}
               <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-              
+                <Link href={presentation.previewUrl} className="bg-white text-primary-700 p-2 rounded-full hover:bg-primary-50">
+                  <ExternalLink size={18} />
+                </Link>
                 <Link href={presentation.downloadUrl} className="bg-white text-primary-700 p-2 rounded-full hover:bg-primary-50">
                   <Download size={18} />
                 </Link>
@@ -124,7 +190,49 @@ export default function PresentationsTab() {
                 {presentation.description[language]}
               </p>
               
-              <div className="flex justify-between items-center text-xs text-neutral-500">
+              {/* Additional presenter and organizer information if available */}
+              {presentation.presenter && (
+                <div className="mb-3 text-sm">
+                  <p className="text-neutral-700 font-medium">
+                    {presentationsContent.presenter[language]} {presentation.presenter.name[language]}
+                  </p>
+                  <p className="text-neutral-600">
+                    {presentation.presenter.title[language]}
+                  </p>
+                </div>
+              )}
+              
+              {presentation.organizer && (
+                <div className="mb-3 text-sm">
+                  <p className="text-neutral-700">
+                    <span className="font-medium">{presentationsContent.organizer[language]}</span> {presentation.organizer[language]}
+                  </p>
+                </div>
+              )}
+              
+              {presentation.eventDate && (
+                <div className="mb-3 text-sm font-medium text-primary-600">
+                  {presentation.eventDate[language]}
+                </div>
+              )}
+              
+              {/* Additional details if available */}
+              {presentation.details && (
+                <div className="mb-4 mt-2 text-sm text-neutral-700 border-t border-neutral-200 pt-3">
+                  <ul className="list-disc list-inside space-y-1">
+                    {presentation.details[language].slice(0, 3).map((item, index) => (
+                      <li key={index} className="text-xs">{item}</li>
+                    ))}
+                  </ul>
+                  {presentation.details[language].length > 3 && (
+                    <p className="text-xs text-primary-600 mt-1 cursor-pointer hover:underline">
+                      {language === 'en' ? 'See more...' : 'Angalia zaidi...'}
+                    </p>
+                  )}
+                </div>
+              )}
+              
+              <div className="flex justify-between items-center text-xs text-neutral-500 mt-2">
                 <div className="flex items-center gap-1">
                   <Calendar size={14} />
                   <span>{formatDate(presentation.dateCreated)}</span>
