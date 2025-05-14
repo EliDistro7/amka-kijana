@@ -63,7 +63,7 @@ export default function ZoomMeetingsTab() {
       date: "2025-03-05",
       duration: "01:55:27",
       attendees: 42,
-      recordingUrl: "/resources/zoom/reproductive-health-1.mp4",
+      recordingUrl: "https://us02web.zoom.us/rec/share/Y-mt11k0NpkciQvwK8QN-3NjEcef9Ui9NK1RM-oX1wGVpv-B89gQpdtgrAIPAkXg.HavMtUsmdSPzkiPp?startTime=1741195244000",
       presentationUrl: "/resources/presentations/reproductive-health-slides-1.pptx",
       hasPassword: true,
       password: "+GgKXh5c"
@@ -82,7 +82,7 @@ export default function ZoomMeetingsTab() {
       date: "2024-10-22",
       duration: "01:34:59",
       attendees: 38,
-      recordingUrl: "/reproductive-health-2.mp4",
+      recordingUrl: "https://us02web.zoom.us/rec/share/exRJUquiibNLbnKu3FK-Pa5tRUOz9AXUUxZ1etVbXTGQ0eNzjryRe12wXBZUcdSR.lxYOmNniUxTrrQA3?startTime=1741280594000",
       presentationUrl: "/resources/presentations/reproductive-health-slides-2.pptx",
       hasPassword: true,
       password: "+GgKXh5c"
@@ -156,15 +156,7 @@ export default function ZoomMeetingsTab() {
                     <span>{translations.watchRecording[language]}</span>
                   </Link>
                   
-                  {meeting.presentationUrl && (
-                    <Link 
-                      href={meeting.presentationUrl} 
-                      className="py-2 px-4 border border-primary-200 hover:bg-primary-50 text-primary-700 rounded-md text-sm font-medium flex items-center justify-center gap-2 transition-colors"
-                    >
-                      <Download size={14} />
-                      <span>{translations.slides[language]}</span>
-                    </Link>
-                  )}
+             
                 </div>
                 
                 {meeting.hasPassword && (
