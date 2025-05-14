@@ -59,8 +59,8 @@ export default function ZoomMeetingsTab() {
         en: "Discussion on how men can be active participants and supporters in reproductive health and mental wellbeing.",
         sw: "Majadiliano kuhusu jinsi wanaume wanavyoweza kuwa washiriki na wasaidizi katika afya ya uzazi na ustawi wa akili."
       },
-      thumbnail: "/images/zoom/reproductive-health-1.jpg",
-      date: "2024-10-15",
+      thumbnail: "/reproductive-health-1.jpg",
+      date: "2025-03-05",
       duration: "01:55:27",
       attendees: 42,
       recordingUrl: "/resources/zoom/reproductive-health-1.mp4",
@@ -82,7 +82,7 @@ export default function ZoomMeetingsTab() {
       date: "2024-10-22",
       duration: "01:34:59",
       attendees: 38,
-      recordingUrl: "/resources/zoom/reproductive-health-2.mp4",
+      recordingUrl: "/reproductive-health-2.mp4",
       presentationUrl: "/resources/presentations/reproductive-health-slides-2.pptx",
       hasPassword: true,
       password: "+GgKXh5c"
