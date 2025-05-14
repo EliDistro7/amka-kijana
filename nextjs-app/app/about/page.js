@@ -23,6 +23,7 @@ const sourceSans = Source_Sans_Pro({
 });
 
 // Bilingual content
+// Bilingual content
 const aboutContent = {
   hero: {
     title: {
@@ -61,12 +62,14 @@ const aboutContent = {
     },
     content: {
       en: [
-        "Founded in 2020 by a group of mental health advocates, Amka Kijana began as a small community initiative in Dar es Salaam.",
-        "What started as weekly peer support groups has grown into a nationwide movement reaching over 10,000 youth annually through our programs in schools and communities."
+        "Founded in 2018 by a group of sexual reproductive health and mental health advocates, Amka Kijana began as a support and awareness creation initiative for disadvantaged youth aged 11-24.",
+        "What started as focused support groups has grown to reach both youth and adults in the community at large, serving 1000 youth and 500 adults since launching our programs in September 2024.",
+        "We are proudly based in Mbezi Luis, where we continue to expand our impact."
       ],
       sw: [
-        "Iliyoanzishwa mwaka 2020 na kikundi cha watetezi wa afya ya akili, Amka Kijana ilianza kama mpango mdogo wa jamii huko Dar es Salaam.",
-        "Kilichokuwa mikutano ya kila wiki ya vikundi vya usaidizi kwa wenza kimekuwa harakati ya kitaifa inayofikia zaidi ya vijana 10,000 kwa mwaka kupitia mipango yetu shuleni na katika jamii."
+        "Ilianzishwa mwaka 2018 na kikundi cha watetezi wa afya ya uzazi na afya ya akili, Amka Kijana ilianza kama mpango wa usaidizi na uhamasishaji kwa vijana walio katika mazingira magumu wenye umri wa miaka 11-24.",
+        "Kilichoanza kama vikundi vya usaidizi vimeendelea kukua na kuwafikia vijana na watu wazima katika jamii kwa ujumla, tukihudumia vijana 1000 na watu wazima 500 tangu kuanzisha mipango yetu mnamo Septemba 2024.",
+        "Tunajivunia kuwa katika Mbezi Luis, ambapo tunaendelea kupanua athari zetu."
       ]
     }
   },

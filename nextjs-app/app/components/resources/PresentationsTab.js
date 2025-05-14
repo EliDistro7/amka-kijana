@@ -112,7 +112,7 @@ export default function PresentationsTab() {
           "Matumizi mabaya ya dawa kama njia ya kukabiliana"
         ]
       },
-      thumbnail: "/mental_health.jpg",
+      thumbnail: "/mental_health.JPG",
       dateCreated: "2025-03-10",
       fileSize: "3.8 MB",
       downloadUrl: "/mental_health.pptx",
