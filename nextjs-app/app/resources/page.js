@@ -72,8 +72,8 @@ export default function ResourcesPage() {
       </div>
 
       {/* Enhanced Tabs Section */}
-      <div className="container max-w-6xl mx-auto px-6 pb-20">
-        <div className="bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl border border-white/20 overflow-hidden">
+      <div className="container max-w-6xl mx-auto px-2 pb-20">
+        <div className="bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl  overflow-hidden">
           <Tabs 
             defaultValue="presentations" 
             value={activeTab}
@@ -82,7 +82,7 @@ export default function ResourcesPage() {
           >
             {/* Bold Tab Navigation */}
             <div className="bg-gradient-to-r from-primary-600 to-secondary-600 p-8">
-              <TabsList className="bg-white/20 backdrop-blur-md p-2 rounded-2xl border border-white/30 shadow-lg">
+              <TabsList className="bg-white/20 backdrop-blur-md p-2 rounded-2xl  shadow-lg">
                 <TabsTrigger 
                   value="presentations" 
                   className={`flex items-center gap-3 px-8 py-4 rounded-xl transition-all duration-300 font-bold text-base ${
@@ -122,7 +122,7 @@ export default function ResourcesPage() {
             </div>
 
             {/* Content Area with Enhanced Styling */}
-            <div className="p-8 md:p-12">
+            <div className="p-8 px-0 md:p-12">
               <TabsContent value="presentations" className="mt-0">
                 <div className="animate-in fade-in-50 slide-in-from-bottom-4 duration-500">
                   <PresentationsTab />

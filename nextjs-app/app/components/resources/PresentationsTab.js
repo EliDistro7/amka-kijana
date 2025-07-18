@@ -157,8 +157,8 @@ export default function PresentationsTab() {
       {/* Header Section */}
       <div className="relative overflow-hidden bg-gradient-to-r from-primary-600 to-primary-700 text-white">
         <div className="absolute inset-0 bg-[url('/api/placeholder/1200/400')] bg-cover bg-center opacity-10"></div>
-        <div className="relative px-6 py-12">
-          <div className="max-w-4xl mx-auto">
+        <div className="relative px-2 py-12">
+          <div className="max-w-4xl mx-0">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
               {presentationsContent.title[language]}
             </h1>
@@ -182,7 +182,7 @@ export default function PresentationsTab() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="max-w-7xl mx-0 px-0 py-12">
         {presentations.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {presentations.map((presentation) => (
@@ -223,6 +223,7 @@ export default function PresentationsTab() {
                     </Link>
                     <Link 
                       href={presentation.downloadUrl} 
+                      download
                       className="bg-primary-600 text-white p-3 rounded-full hover:bg-primary-700 hover:shadow-lg transition-all duration-200 transform hover:scale-110"
                       title={presentationsContent.download[language]}
                     >
@@ -232,7 +233,7 @@ export default function PresentationsTab() {
                 </div>
 
                 {/* Content */}
-                <div className="p-6">
+                <div className="p-6 px-0">
                   <h3 className="font-bold text-xl text-neutral-900 mb-3 line-clamp-2 group-hover:text-primary-700 transition-colors">
                     {presentation.title[language]}
                   </h3>
@@ -243,7 +244,7 @@ export default function PresentationsTab() {
 
                   {/* Event Date */}
                   {presentation.eventDate && (
-                    <div className="mb-4 p-3 bg-primary-50 rounded-lg border-l-4 border-primary-400">
+                    <div className="mb-4 p-3 bg-primary-50 rounded-lg ">
                       <div className="flex items-center gap-2 text-primary-700 font-medium text-sm">
                         <Calendar size={16} />
                         <span>{presentation.eventDate[language]}</span>
@@ -289,7 +290,7 @@ export default function PresentationsTab() {
                   {/* Key Points */}
                   {presentation.details && (
                     <div className="mb-4">
-                      <div className="bg-blue-50 rounded-lg p-3 border-l-4 border-blue-400">
+                      <div className="bg-blue-50 rounded-lg p-3 ">
                         <h4 className="text-sm font-medium text-blue-900 mb-2">
                           {language === 'en' ? 'Key Points:' : 'Mambo Muhimu:'}
                         </h4>
@@ -326,10 +327,11 @@ export default function PresentationsTab() {
                 <div className="px-6 pb-6">
                   <Link 
                     href={presentation.downloadUrl} 
+                    download
                     className="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white py-3 px-4 rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-200 flex items-center justify-center gap-2 font-medium shadow-lg hover:shadow-xl"
                   >
-                    <Download size={16} />
-                    <span>{presentationsContent.download[language]}</span>
+                    <Download className='text-gray-800' size={16} />
+                    <span className='text-gray-800'>{presentationsContent.download[language]}</span>
                   </Link>
                 </div>
               </div>

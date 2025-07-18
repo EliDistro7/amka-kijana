@@ -235,7 +235,7 @@ export default function ZoomMeetingsTab() {
                   
                   {/* Enhanced Password Section */}
                   {meeting.hasPassword && (
-                    <div className="p-4 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl">
+                    <div className="p-4 bg-gradient-to-r from-amber-50 to-orange-50  rounded-xl">
                       <div className="flex items-center gap-3">
                         <div className="p-2 bg-amber-500 rounded-lg">
                           <Lock size={16} className="text-white" />
@@ -260,10 +260,10 @@ export default function ZoomMeetingsTab() {
 
       {/* Enhanced Empty State */}
       {zoomMeetings.length === 0 && (
-        <div className="text-center py-20 px-4">
+        <div className="text-center py-10 px-4">
           <div className="relative inline-block mb-8">
             <div className="absolute inset-0 bg-gradient-to-r from-primary-200 to-secondary-200 rounded-full blur-xl opacity-50"></div>
-            <div className="relative p-8 bg-white rounded-full shadow-2xl border-4 border-primary-100">
+            <div className="relative p-8 bg-white rounded-full shadow-2xl ">
               <Video size={64} className="text-primary-400" />
             </div>
           </div>
