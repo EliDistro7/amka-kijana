@@ -6,6 +6,7 @@ import GetStartedCode from "@/app/components/GetStartedCode";
 import Hero from "./components/HeroSection";
 import { CallToAction } from "./components/CTASection";
 import {ProgramsSection} from './components/ProgramsSections'
+import YoutubePlayer from "@/app/components/youtube/YoutubePlayer";
 
 export default async function Page() {
   return (
@@ -18,6 +19,10 @@ export default async function Page() {
         <aside className="py-12 sm:py-12 w-full">
           <Suspense>{await AllPosts()}</Suspense>
         </aside>
+        <YoutubePlayer
+         title="Amka Kijana ni nini?"
+          videoId="U59eeX8YlAY"
+          />
         <ProgramsSection />
         <CallToAction />
       </div>

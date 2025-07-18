@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Download, FileArchive as FilePresentation, ExternalLink, Calendar, Clock } from 'lucide-react';
+import { Download, FileArchive as FilePresentation, ExternalLink, Calendar, Clock, User, Building2 } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 
 export default function PresentationsTab() {
@@ -25,6 +25,10 @@ export default function PresentationsTab() {
     download: {
       en: "Download",
       sw: "Pakua"
+    },
+    preview: {
+      en: "Preview",
+      sw: "Hakikisha"
     },
     noPresentation: {
       en: "No presentations available",
@@ -61,6 +65,8 @@ export default function PresentationsTab() {
       fileSize: "4.2 MB",
       downloadUrl: "/ukatili.pptx",
       previewUrl: "/resources/previews/strategy-overview",
+      category: "Activism",
+      color: "bg-red-500"
     },
     {
       id: 2,
@@ -115,8 +121,10 @@ export default function PresentationsTab() {
       thumbnail: "/mental_health.JPG",
       dateCreated: "2025-03-10",
       fileSize: "3.8 MB",
-      downloadUrl: "/mental_health.pptx",
+      downloadUrl: "/men.pdf",
       previewUrl: "/resources/previews/mental-health",
+      category: "Mental Health",
+      color: "bg-blue-500"
     },
     {
       id: 3,
@@ -133,6 +141,8 @@ export default function PresentationsTab() {
       fileSize: "5.6 MB",
       downloadUrl: "/man.pptx",
       previewUrl: "/resources/previews/success-stories",
+      category: "Reproductive Health",
+      color: "bg-green-500"
     },
   ];
 
@@ -143,126 +153,204 @@ export default function PresentationsTab() {
   };
 
   return (
-    <div className="space-y-8">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-heading-2 font-heading text-primary-800">{presentationsContent.title[language]}</h2>
-        <div className="text-sm text-neutral-500">
-          {presentations.length} {presentations.length === 1 ? 
-            presentationsContent.item[language] : 
-            presentationsContent.items[language]}
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {presentations.map((presentation) => (
-          <div key={presentation.id} className="bg-white rounded-lg border border-neutral-200 overflow-hidden transition-all hover:shadow-soft group">
-            <div className="relative aspect-video bg-neutral-100">
-              {/* Display the actual thumbnail image */}
-              {presentation.thumbnail ? (
-                <Image 
-                  src={presentation.thumbnail}
-                  alt={presentation.title[language]}
-                  fill
-                  className="object-cover"
-                />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center bg-primary-50">
-                  <FilePresentation size={48} className="text-primary-300" />
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+      {/* Header Section */}
+      <div className="relative overflow-hidden bg-gradient-to-r from-primary-600 to-primary-700 text-white">
+        <div className="absolute inset-0 bg-[url('/api/placeholder/1200/400')] bg-cover bg-center opacity-10"></div>
+        <div className="relative px-6 py-12">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
+              {presentationsContent.title[language]}
+            </h1>
+            <p className="text-xl text-blue-100 mb-6">
+              {language === 'en' ? 'Explore our comprehensive collection of educational presentations' : 'Chunguza mkusanyiko wetu wa kina wa maonyesho ya kielimu'}
+            </p>
+            <div className="flex items-center gap-4 text-blue-100">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                  <FilePresentation size={16} />
                 </div>
-              )}
-
-              {/* Hover actions overlay */}
-              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                <Link href={presentation.previewUrl} className="bg-white text-primary-700 p-2 rounded-full hover:bg-primary-50">
-                  <ExternalLink size={18} />
-                </Link>
-                <Link href={presentation.downloadUrl} className="bg-white text-primary-700 p-2 rounded-full hover:bg-primary-50">
-                  <Download size={18} />
-                </Link>
+                <span className="text-sm font-medium">
+                  {presentations.length} {presentations.length === 1 ? 
+                    presentationsContent.item[language] : 
+                    presentationsContent.items[language]}
+                </span>
               </div>
-            </div>
-
-            <div className="p-4">
-              <h3 className="font-medium text-lg text-primary-900 mb-2">{presentation.title[language]}</h3>
-              
-              {/* Using description as a header/subtitle about reproductive health and mental wellness */}
-              <p className="text-sm text-neutral-600 mb-4 font-semibold italic">
-                {presentation.description[language]}
-              </p>
-              
-              {/* Additional presenter and organizer information if available */}
-              {presentation.presenter && (
-                <div className="mb-3 text-sm">
-                  <p className="text-neutral-700 font-medium">
-                    {presentationsContent.presenter[language]} {presentation.presenter.name[language]}
-                  </p>
-                  <p className="text-neutral-600">
-                    {presentation.presenter.title[language]}
-                  </p>
-                </div>
-              )}
-              
-              {presentation.organizer && (
-                <div className="mb-3 text-sm">
-                  <p className="text-neutral-700">
-                    <span className="font-medium">{presentationsContent.organizer[language]}</span> {presentation.organizer[language]}
-                  </p>
-                </div>
-              )}
-              
-              {presentation.eventDate && (
-                <div className="mb-3 text-sm font-medium text-primary-600">
-                  {presentation.eventDate[language]}
-                </div>
-              )}
-              
-              {/* Additional details if available */}
-              {presentation.details && (
-                <div className="mb-4 mt-2 text-sm text-neutral-700 border-t border-neutral-200 pt-3">
-                  <ul className="list-disc list-inside space-y-1">
-                    {presentation.details[language].slice(0, 3).map((item, index) => (
-                      <li key={index} className="text-xs">{item}</li>
-                    ))}
-                  </ul>
-                  {presentation.details[language].length > 3 && (
-                    <p className="text-xs text-primary-600 mt-1 cursor-pointer hover:underline">
-                      {language === 'en' ? 'See more...' : 'Angalia zaidi...'}
-                    </p>
-                  )}
-                </div>
-              )}
-              
-              <div className="flex justify-between items-center text-xs text-neutral-500 mt-2">
-                <div className="flex items-center gap-1">
-                  <Calendar size={14} />
-                  <span>{formatDate(presentation.dateCreated)}</span>
-                </div>
-                <div>{presentation.fileSize}</div>
-              </div>
-            </div>
-
-            <div className="p-4 pt-0 flex justify-between">
-              <Link 
-                href={presentation.downloadUrl} 
-                className="text-sm font-medium text-primary-600 hover:text-primary-700 flex items-center gap-1"
-              >
-                <span>{presentationsContent.download[language]}</span>
-                <Download size={14} />
-              </Link>
             </div>
           </div>
-        ))}
+        </div>
       </div>
 
-      {presentations.length === 0 && (
-        <div className="text-center py-12 px-4">
-          <FilePresentation size={48} className="mx-auto text-neutral-300 mb-4" />
-          <h3 className="text-lg font-medium text-neutral-700 mb-2">
-            {presentationsContent.noPresentation[language]}
-          </h3>
-          <p className="text-neutral-500">{presentationsContent.checkBack[language]}</p>
-        </div>
-      )}
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        {presentations.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {presentations.map((presentation) => (
+              <div key={presentation.id} className="group relative bg-white rounded-2xl shadow-sm border border-neutral-200 overflow-hidden hover:shadow-xl hover:shadow-primary-500/10 transition-all duration-300 hover:-translate-y-1">
+                {/* Category Badge */}
+                <div className="absolute top-4 left-4 z-10">
+                  <div className={`${presentation.color} text-white px-3 py-1 rounded-full text-xs font-medium shadow-lg`}>
+                    {presentation.category}
+                  </div>
+                </div>
+
+                {/* Thumbnail */}
+                <div className="relative aspect-video bg-gradient-to-br from-neutral-100 to-neutral-200 overflow-hidden">
+                  {presentation.thumbnail ? (
+                    <Image 
+                      src={presentation.thumbnail}
+                      alt={presentation.title[language]}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary-50 to-primary-100">
+                      <FilePresentation size={48} className="text-primary-300" />
+                    </div>
+                  )}
+
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                  {/* Action buttons */}
+                  <div className="absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                    <Link 
+                      href={presentation.previewUrl} 
+                      className="bg-white/90 backdrop-blur-sm text-primary-700 p-3 rounded-full hover:bg-white hover:shadow-lg transition-all duration-200 transform hover:scale-110"
+                      title={presentationsContent.preview[language]}
+                    >
+                      <ExternalLink size={20} />
+                    </Link>
+                    <Link 
+                      href={presentation.downloadUrl} 
+                      className="bg-primary-600 text-white p-3 rounded-full hover:bg-primary-700 hover:shadow-lg transition-all duration-200 transform hover:scale-110"
+                      title={presentationsContent.download[language]}
+                    >
+                      <Download size={20} />
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="p-6">
+                  <h3 className="font-bold text-xl text-neutral-900 mb-3 line-clamp-2 group-hover:text-primary-700 transition-colors">
+                    {presentation.title[language]}
+                  </h3>
+                  
+                  <p className="text-sm text-neutral-600 mb-4 line-clamp-3 leading-relaxed">
+                    {presentation.description[language]}
+                  </p>
+
+                  {/* Event Date */}
+                  {presentation.eventDate && (
+                    <div className="mb-4 p-3 bg-primary-50 rounded-lg border-l-4 border-primary-400">
+                      <div className="flex items-center gap-2 text-primary-700 font-medium text-sm">
+                        <Calendar size={16} />
+                        <span>{presentation.eventDate[language]}</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Presenter Info */}
+                  {presentation.presenter && (
+                    <div className="mb-4 p-3 bg-neutral-50 rounded-lg">
+                      <div className="flex items-start gap-3">
+                        <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                          <User size={16} className="text-primary-600" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-neutral-900">
+                            {presentation.presenter.name[language]}
+                          </p>
+                          <p className="text-xs text-neutral-600 mt-1">
+                            {presentation.presenter.title[language]}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Organizer */}
+                  {presentation.organizer && (
+                    <div className="mb-4 p-3 bg-neutral-50 rounded-lg">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                          <Building2 size={16} className="text-green-600" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-neutral-900">
+                            {presentation.organizer[language]}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Key Points */}
+                  {presentation.details && (
+                    <div className="mb-4">
+                      <div className="bg-blue-50 rounded-lg p-3 border-l-4 border-blue-400">
+                        <h4 className="text-sm font-medium text-blue-900 mb-2">
+                          {language === 'en' ? 'Key Points:' : 'Mambo Muhimu:'}
+                        </h4>
+                        <ul className="space-y-1">
+                          {presentation.details[language].slice(0, 3).map((item, index) => (
+                            <li key={index} className="text-xs text-blue-800 flex items-start gap-2">
+                              <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mt-1.5 flex-shrink-0"></span>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        {presentation.details[language].length > 3 && (
+                          <p className="text-xs text-blue-600 mt-2 font-medium cursor-pointer hover:underline">
+                            {language === 'en' ? '+ See more details' : '+ Angalia maelezo zaidi'}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Meta Information */}
+                  <div className="flex justify-between items-center pt-4 border-t border-neutral-100">
+                    <div className="flex items-center gap-2 text-xs text-neutral-500">
+                      <Calendar size={14} />
+                      <span>{formatDate(presentation.dateCreated)}</span>
+                    </div>
+                    <div className="text-xs text-neutral-500 bg-neutral-100 px-2 py-1 rounded-full">
+                      {presentation.fileSize}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Download Footer */}
+                <div className="px-6 pb-6">
+                  <Link 
+                    href={presentation.downloadUrl} 
+                    className="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white py-3 px-4 rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-200 flex items-center justify-center gap-2 font-medium shadow-lg hover:shadow-xl"
+                  >
+                    <Download size={16} />
+                    <span>{presentationsContent.download[language]}</span>
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-16">
+            <div className="bg-white rounded-2xl shadow-sm border border-neutral-200 p-12 max-w-md mx-auto">
+              <div className="w-16 h-16 bg-neutral-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <FilePresentation size={32} className="text-neutral-400" />
+              </div>
+              <h3 className="text-xl font-bold text-neutral-700 mb-3">
+                {presentationsContent.noPresentation[language]}
+              </h3>
+              <p className="text-neutral-500 leading-relaxed">
+                {presentationsContent.checkBack[language]}
+              </p>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
